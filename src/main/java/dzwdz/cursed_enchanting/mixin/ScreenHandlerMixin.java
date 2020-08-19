@@ -41,7 +41,7 @@ public class ScreenHandlerMixin {
             if (world.getBlockState(blockPos.down(1)).getBlock().isIn(EntryPoint.CURSED_GROUND)) {
 
                 this.random.setSeed(this.seed.get() + slot);
-                List<EnchantmentLevelEntry> list = EnchantmentHelper.generateEnchantments(this.random, stack, level + 5, true);
+                List<EnchantmentLevelEntry> list = EnchantmentHelper.generateEnchantments(this.random, stack, level + 3, true);
                 if (stack.getItem() == Items.BOOK && list.size() > 1) {
                     list.remove(this.random.nextInt(list.size()));
                 }
