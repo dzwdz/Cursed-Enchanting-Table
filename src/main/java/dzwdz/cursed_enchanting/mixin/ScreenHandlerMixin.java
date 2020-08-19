@@ -1,6 +1,6 @@
-package dzwdz.cursed_enchanting_table.mixin;
+package dzwdz.cursed_enchanting.mixin;
 
-import dzwdz.cursed_enchanting_table.EntryPoint;
+import dzwdz.cursed_enchanting.EntryPoint;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
 import net.minecraft.item.ItemStack;

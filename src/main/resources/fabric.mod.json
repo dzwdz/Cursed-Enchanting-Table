@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "cursedenchantingtable",
+  "id": "cursed_enchanting",
   "version": "${version}",
-  "name": "Cursed Enchanting Table",
+  "name": "Cursed Enchanting",
   "description": "Get better enchants... at a price",
   "authors": [
     "dzwdz"
@@ -11,15 +11,15 @@
     "sources": "https://github.com/dzwdz/Cursed-Enchanting-Table"
   },
   "license": "MPL-2.0",
-  "icon": "assets/cursedenchantingtable/icon.png",
+  "icon": "assets/cursed_enchanting/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dzwdz.cursed_enchanting_table.EntryPoint"
+      "dzwdz.cursed_enchanting.EntryPoint"
     ]
   },
   "mixins": [
-    "cursedenchantingtable.mixins.json"
+    "cursed_enchanting.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.9.2+build.206",
