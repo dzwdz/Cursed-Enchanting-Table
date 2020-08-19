@@ -8,6 +8,7 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.EnchantmentScreenHandler;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.ScreenHandlerContext;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,10 +21,13 @@ import java.util.stream.Collectors;
 
 @Mixin(EnchantmentScreenHandler.class)
 public class ScreenHandlerMixin {
+    @Final
     @Shadow
     private ScreenHandlerContext context;
+    @Final
     @Shadow
     private Random random;
+    @Final
     @Shadow
     private Property seed;
 
@@ -32,17 +36,17 @@ public class ScreenHandlerMixin {
     }
 
     @Inject(method = "Lnet/minecraft/screen/EnchantmentScreenHandler;generateEnchantments(Lnet/minecraft/item/ItemStack;II)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
-    public void generateEnchantments(ItemStack stack, int slot, int level, CallbackInfoReturnable callbackInfo) {
+    public void generateEnchantments(ItemStack stack, int slot, int level, CallbackInfoReturnable<List<EnchantmentLevelEntry>> callbackInfo) {
         this.context.run((world, blockPos) -> {
             if (world.getBlockState(blockPos.down(1)).getBlock().isIn(EntryPoint.CURSED_GROUND)) {
 
-                this.random.setSeed((long)(this.seed.get() + slot));
+                this.random.setSeed(this.seed.get() + slot);
                 List<EnchantmentLevelEntry> list = EnchantmentHelper.generateEnchantments(this.random, stack, level + 5, true);
                 if (stack.getItem() == Items.BOOK && list.size() > 1) {
                     list.remove(this.random.nextInt(list.size()));
                 }
 
-                boolean hasCurses = list.stream().filter(this::curseFilter).count() > 0;
+                boolean hasCurses = list.stream().anyMatch(this::curseFilter);
                 if (!hasCurses) {
                     List<EnchantmentLevelEntry> curseStream = EnchantmentHelper.getPossibleEntries(level + 5, stack, true).stream().filter(this::curseFilter).collect(Collectors.toList());
                     if (curseStream.size() > 0) {
