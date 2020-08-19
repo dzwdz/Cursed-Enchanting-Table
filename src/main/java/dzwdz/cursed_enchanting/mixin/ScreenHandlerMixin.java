@@ -48,7 +48,7 @@ public class ScreenHandlerMixin {
 
                 boolean hasCurses = list.stream().anyMatch(this::curseFilter);
                 if (!hasCurses) {
-                    List<EnchantmentLevelEntry> curseStream = EnchantmentHelper.getPossibleEntries(level + 5, stack, true).stream().filter(this::curseFilter).collect(Collectors.toList());
+                    List<EnchantmentLevelEntry> curseStream = EnchantmentHelper.getPossibleEntries(30, stack, true).stream().filter(this::curseFilter).collect(Collectors.toList());
                     if (curseStream.size() > 0) {
                         list.add(curseStream.get(this.random.nextInt(curseStream.size())));
                     }
