@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "dzwdz.cursed_enchanting.EntryPoint"
+    ],
+    "modmenu": [
+      "dzwdz.cursed_enchanting.ModMenuIntegration"
     ]
   },
   "mixins": [
